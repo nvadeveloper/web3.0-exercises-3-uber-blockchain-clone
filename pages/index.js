@@ -2,6 +2,7 @@
 //   wrapper: ``,
 // }
 
+import LocationSelector from "../components/LocationSelector"
 import Map from "../components/Map"
 import Navbar from "../components/Navbar"
 
@@ -22,7 +23,7 @@ const Home = () => {
       </div>
       <div className={style.rideRequestContainer}>
         <div className={style.rideRequest}>
-        
+          <LocationSelector />
         </div>
       </div>
     </div>
