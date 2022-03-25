@@ -2,7 +2,7 @@
 //   wrapper: ``,
 // }
 
-import Navbar from "../componets/Navbar"
+import Navbar from "../components/Navbar"
 
 const style = {
   wrapper: `h-screen w-screen flex flex-col`
