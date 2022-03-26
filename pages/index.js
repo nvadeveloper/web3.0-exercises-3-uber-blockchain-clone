@@ -2,6 +2,7 @@
 //   wrapper: ``,
 // }
 
+import Confirm from "../components/Confirm"
 import LocationSelector from "../components/LocationSelector"
 import Map from "../components/Map"
 import Navbar from "../components/Navbar"
@@ -24,6 +25,7 @@ const Home = () => {
       <div className={style.rideRequestContainer}>
         <div className={style.rideRequest}>
           <LocationSelector />
+          <Confirm />
         </div>
       </div>
     </div>
