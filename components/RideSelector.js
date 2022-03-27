@@ -6,6 +6,7 @@ import uberBlack from '../assets/rides/uberBlack.png'
 
 import ethLogo from '../assets/eth-logo.png'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 const style = {
     wrapper: `h-full flex flex-col`,
@@ -24,35 +25,52 @@ const style = {
 const basePrice = 1542
 
 
-const carList = [
-    {
-        service: 'UberX',
-        iconUrl: uberX,
-        priceMultiplier: 1,
-    },
-    {
-        service: 'UberXL',
-        iconUrl: uberXL,
-        priceMultiplier: 1.5,
-    },
-    {
-        service: 'UberSelect',
-        iconUrl: uberSelect,
-        priceMultiplier: 1.5,
-    },
-    {
-        service: 'UberBlackSuv',
-        iconUrl: uberBlackSuv,
-        priceMultiplier: 1.5,
-    },
-    {
-        service: 'UberBlack',
-        iconUrl: uberBlack,
-        priceMultiplier: 1.5,
-    }
-]
+// const carList = [
+//     {
+//         service: 'UberX',
+//         iconUrl: uberX,
+//         priceMultiplier: 1,
+//     },
+//     {
+//         service: 'UberXL',
+//         iconUrl: uberXL,
+//         priceMultiplier: 1.5,
+//     },
+//     {
+//         service: 'UberSelect',
+//         iconUrl: uberSelect,
+//         priceMultiplier: 1.5,
+//     },
+//     {
+//         service: 'UberBlackSuv',
+//         iconUrl: uberBlackSuv,
+//         priceMultiplier: 1.5,
+//     },
+//     {
+//         service: 'UberBlack',
+//         iconUrl: uberBlack,
+//         priceMultiplier: 1.5,
+//     }
+// ]
 
 const RideSelector = () => {
+
+    const [carList, setCarList] = useState([])
+
+    useEffect(() => {
+        ;(async () => {
+            try {
+                const response = await fetch('/api/db/getRideTypes')
+
+                const data = await response.json()
+
+                setCarList(data.data)
+            } catch (error) {
+                
+            }
+        })()
+    }, [])
+
     return (
         <div className={style.wrapper}>
             <div className={style.title}>Choose a rise, or swipe up for more</div>
