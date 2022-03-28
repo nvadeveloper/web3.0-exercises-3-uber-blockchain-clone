@@ -1,5 +1,6 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import mapboxgl from "mapbox-gl"
+import { UberContext } from "../context/uberContext"
 
 const style = {
     wrapper: `flex-1 h-full w-full `
@@ -8,6 +9,8 @@ const style = {
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 const Map  = () => {
+    const { pickupCoordinates, dropoffCoordinates } = useContext(UberContext)
+
     useEffect(() => {
         const map = new mapboxgl.Map({
             container: 'map',
@@ -15,7 +18,27 @@ const Map  = () => {
             center: [-99.29011, 39.39172],
             zoom: 3
         })
-    }), []
+
+        if (pickupCoordinates) {
+            addToMap(map, pickupCoordinates)
+            console.log(pickupCoordinates)
+        }
+    
+        if (dropoffCoordinates) {
+            addToMap(map, dropoffCoordinates)
+            console.log(dropoffCoordinates)
+        }
+    
+        if (pickupCoordinates && dropoffCoordinates) {
+            map.fitBounds([dropoffCoordinates, pickupCoordinates], {
+                padding: 60
+            })
+        }
+    }), [pickupCoordinates, dropoffCoordinates]
+
+    const addToMap = (map, coordinates) => {
+        const markerOne = new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
+    }
 
     return (
         <div className={style.wrapper} id='map'>

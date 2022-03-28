@@ -1,7 +1,3 @@
-// const style = {
-//   wrapper: ``,
-// }
-
 import Confirm from "../components/Confirm"
 import LocationSelector from "../components/LocationSelector"
 import Map from "../components/Map"

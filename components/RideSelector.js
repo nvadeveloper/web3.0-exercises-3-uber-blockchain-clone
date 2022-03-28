@@ -24,35 +24,6 @@ const style = {
 
 const basePrice = 1542
 
-
-// const carList = [
-//     {
-//         service: 'UberX',
-//         iconUrl: uberX,
-//         priceMultiplier: 1,
-//     },
-//     {
-//         service: 'UberXL',
-//         iconUrl: uberXL,
-//         priceMultiplier: 1.5,
-//     },
-//     {
-//         service: 'UberSelect',
-//         iconUrl: uberSelect,
-//         priceMultiplier: 1.5,
-//     },
-//     {
-//         service: 'UberBlackSuv',
-//         iconUrl: uberBlackSuv,
-//         priceMultiplier: 1.5,
-//     },
-//     {
-//         service: 'UberBlack',
-//         iconUrl: uberBlack,
-//         priceMultiplier: 1.5,
-//     }
-// ]
-
 const RideSelector = () => {
 
     const [carList, setCarList] = useState([])

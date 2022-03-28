@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { UberContext } from "../context/uberContext"
 
 const style = {
     wrapper: `pt-2`,
@@ -14,8 +15,7 @@ const style = {
 const LocationSelector = () => {
 
     const [inFocus, setInFocus]= useState('from')
-    const [pickup, setPickup]= useState('')
-    const [dropoff, setDropoff]= useState('')
+    const { pickup, setPickup, dropoff, setDropoff} = useContext(UberContext)
 
     return (
         <div className={style.wrapper}>
@@ -57,8 +57,8 @@ const LocationSelector = () => {
                     <input 
                         className={style.input} 
                         placeholder='Where to?' 
-                        value={pickup}
-                        onChange={e => setPickup(e.target.value)}
+                        value={dropoff}
+                        onChange={e => setDropoff(e.target.value)}
                         onFocus={() => setInFocus('to')}
                     />
                 </div>
