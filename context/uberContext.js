@@ -24,6 +24,12 @@ export const UberProvider = ({ children }) => {
         checkIfWalletIsConnected()
     }, [])
     
+    currentAccount
+
+    useEffect(() => {
+        if(!window.ethereum) return
+        requestToGetCurrentUsersInfo(currentAccount)()
+    }, [currentAccount])
 
     const checkIfWalletIsConnected = async() => {
         if(!window.ethereum) return
@@ -142,6 +148,7 @@ export const UberProvider = ({ children }) => {
             setDropoffCoordinates,
             connectWallet,
             currentAccount,
+            currentUser,
         }}>
             {children}
         </UberContext.Provider>

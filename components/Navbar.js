@@ -19,7 +19,7 @@ const style = {
 
 const Navbar = () => {
 
-    const { currentAccount, connectWallet } = useContext(UberContext)
+    const { currentAccount, connectWallet, currentUser } = useContext(UberContext)
 
     return (
         <div className={style.wrapper}>
@@ -31,7 +31,7 @@ const Navbar = () => {
             </div>
             <div className={style.rightMenu}>
                 <div className={style.menuItem}>Help</div>
-                <div className={style.menuItem}>Lance</div>
+                <div className={style.menuItem}>{currentUser.name?.split('')[0]}</div>
                 <div className={style.userImageContainer}>
                     <Image src={userImage} width={40} height={40} alt='User image' className={style.userImage} />
                 </div>
