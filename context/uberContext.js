@@ -11,6 +11,8 @@ export const UberProvider = ({ children }) => {
     const [pickupCoordinates, setPickupCoordinates] = useState()
     const [dropoffCoordinates, setDropoffCoordinates] = useState()
     const [currentAccount, setCurrentAccount] = useState()
+    const [currentUser, setCurrentUser] = useState()
+
 
     let metamask
 
@@ -112,6 +114,17 @@ export const UberProvider = ({ children }) => {
                     name: faker.name.findName(),
                 }),
             })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const requestToGetCurrentUsersInfo = async (walletAddress) => {
+        try {
+            const response = await fetch(`/api/db/getUserInfo?walletAddress=${walletAddress}`)
+
+            const data = await response.json()
+            setCurrentUser(data.data)
         } catch (error) {
             console.error(error)
         }
