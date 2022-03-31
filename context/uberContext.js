@@ -11,8 +11,9 @@ export const UberProvider = ({ children }) => {
     const [pickupCoordinates, setPickupCoordinates] = useState()
     const [dropoffCoordinates, setDropoffCoordinates] = useState()
     const [currentAccount, setCurrentAccount] = useState()
-    const [currentUser, setCurrentUser] = useState()
-
+    const [currentUser, setCurrentUser] = useState([])
+    const [selectedRide, setSelectedRide] = useState([])
+    const [price, setPrice] = useState()
 
     let metamask
 
@@ -23,13 +24,11 @@ export const UberProvider = ({ children }) => {
     useEffect(() => {
         checkIfWalletIsConnected()
     }, [])
-    
-    currentAccount
 
     useEffect(() => {
-        if(!window.ethereum) return
-        requestToGetCurrentUsersInfo(currentAccount)()
-    }, [currentAccount])
+        if (!currentAccount) return
+        requestToGetCurrentUsersInfo(currentAccount)
+      }, [currentAccount])
 
     const checkIfWalletIsConnected = async() => {
         if(!window.ethereum) return
@@ -149,6 +148,10 @@ export const UberProvider = ({ children }) => {
             connectWallet,
             currentAccount,
             currentUser,
+            selectedRide,
+            setSelectedRide,
+            price,
+            setPrice,
         }}>
             {children}
         </UberContext.Provider>

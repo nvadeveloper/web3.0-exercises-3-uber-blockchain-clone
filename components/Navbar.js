@@ -16,10 +16,14 @@ const style = {
     loginButton: `flex items-center cursor-pointer rounded-full hover:bg-[#333333] px-4 py-1`,
     loginText: `ml-2`,
   }
-
+  
 const Navbar = () => {
 
     const { currentAccount, connectWallet, currentUser } = useContext(UberContext)
+
+    // console.log('currentAccount ' + currentAccount)
+    // console.log('connectWallet ' + connectWallet)
+    // console.log('currentUser ' + currentUser)
 
     return (
         <div className={style.wrapper}>
@@ -31,7 +35,9 @@ const Navbar = () => {
             </div>
             <div className={style.rightMenu}>
                 <div className={style.menuItem}>Help</div>
-                <div className={style.menuItem}>{currentUser.name?.split('')[0]}</div>
+                {currentUser && (
+                    <div className={style.menuItem}>{currentUser.name?.split(' ')[0]}</div>
+                )}     
                 <div className={style.userImageContainer}>
                     <Image src={userImage} width={40} height={40} alt='User image' className={style.userImage} />
                 </div>

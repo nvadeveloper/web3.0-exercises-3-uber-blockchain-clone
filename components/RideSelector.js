@@ -6,7 +6,8 @@ import uberBlack from '../assets/rides/uberBlack.png'
 
 import ethLogo from '../assets/eth-logo.png'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { UberContext } from '../context/uberContext'
 
 const style = {
     wrapper: `h-full flex flex-col`,
@@ -20,34 +21,48 @@ const style = {
     time: `text-xs text-blue-500`,
     priceContainer: `flex items-center`,
     price: `mr-[-0.8rem]`,
-}
+  }
 
 const basePrice = 1542
 
 const RideSelector = () => {
-
     const [carList, setCarList] = useState([])
+    const { selectedRide, setSelectedRide, setPrice } = useContext(UberContext)
+
+    console.log(selectedRide)
 
     useEffect(() => {
         ;(async () => {
-            try {
-                const response = await fetch('/api/db/getRideTypes')
-
-                const data = await response.json()
-
-                setCarList(data.data)
-            } catch (error) {
-                
-            }
+          try {
+            const response = await fetch('/api/db/getRideTypes')
+    
+            const data = await response.json()
+            setCarList(data.data)
+            setSelectedRide(data.data[0])
+          } catch (error) {
+            console.error(error)
+          }
         })()
-    }, [])
+      }, [])
 
     return (
         <div className={style.wrapper}>
             <div className={style.title}>Choose a rise, or swipe up for more</div>
             <div className={style.carList}>
                 {carList.map((car, index) => (
-                    <div className={style.car} key={index}>
+                    <div 
+                        className={
+                            `${
+                                selectedRide.service === car.service 
+                                ? style.selectedCar
+                                : style.car
+                            }`
+                        } 
+                        onClick={() => {
+                            setSelectedRide(car)
+                          }}
+                        key={index}
+                    >
                         <Image 
                             src={car.iconUrl}
                             className={style.carImage}
@@ -78,6 +93,5 @@ const RideSelector = () => {
         </div>
     )
 }
-
 
 export default RideSelector
