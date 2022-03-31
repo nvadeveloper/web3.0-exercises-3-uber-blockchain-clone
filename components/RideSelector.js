@@ -23,12 +23,13 @@ const style = {
     price: `mr-[-0.8rem]`,
   }
 
-// const basePrice = 1542
-
 const RideSelector = () => {
+
     const [carList, setCarList] = useState([])
     const { selectedRide, setSelectedRide, setPrice, basePrice } = useContext(UberContext)
-
+    
+    console.log(basePrice)
+    
     useEffect(() => {
         ;(async () => {
           try {

@@ -21,17 +21,15 @@ const Map  = () => {
 
         if (pickupCoordinates) {
             addToMap(map, pickupCoordinates)
-            // console.log(pickupCoordinates)
         }
     
         if (dropoffCoordinates) {
             addToMap(map, dropoffCoordinates)
-            // console.log(dropoffCoordinates)
         }
     
         if (pickupCoordinates && dropoffCoordinates) {
             map.fitBounds([dropoffCoordinates, pickupCoordinates], {
-                padding: 200
+                padding: 400,
             })
         }
     }), [pickupCoordinates, dropoffCoordinates]

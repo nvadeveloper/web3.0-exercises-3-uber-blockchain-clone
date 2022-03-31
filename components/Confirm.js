@@ -15,7 +15,7 @@ const style = {
 const Confirm = () => {
 
     const { currentAccount, pickup, dropoff, price, selectedRide, pickupCoordinates, dropoffCoordinates, metamask } = useContext(UberContext)
-
+    console.log(price)
     const storeTripDetails = async (pickup, dropoff) => {
         try {
             await fetch('/api/db/saveTrips', {
@@ -42,6 +42,7 @@ const Confirm = () => {
                 from: currentAccount,
                 to: process.env.NEXT_PUBLIC_UBER_ADDRESS,
                 gas: '0x7EF40', // 520000 Gwei
+                // value: price._hex,
                 value: ethers.utils.parseEther(price)._hex,
               },
             ],
