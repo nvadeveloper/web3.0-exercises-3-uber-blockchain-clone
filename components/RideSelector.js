@@ -23,13 +23,11 @@ const style = {
     price: `mr-[-0.8rem]`,
   }
 
-const basePrice = 1542
+// const basePrice = 1542
 
 const RideSelector = () => {
     const [carList, setCarList] = useState([])
-    const { selectedRide, setSelectedRide, setPrice } = useContext(UberContext)
-
-    console.log(selectedRide)
+    const { selectedRide, setSelectedRide, setPrice, basePrice } = useContext(UberContext)
 
     useEffect(() => {
         ;(async () => {
@@ -60,6 +58,7 @@ const RideSelector = () => {
                         } 
                         onClick={() => {
                             setSelectedRide(car)
+                            setPrice(((basePrice / 10 ** 5) * car.priceMultiplier).toFixed(5))
                           }}
                         key={index}
                     >

@@ -16,8 +16,6 @@ const getLocationCoordinates = async (req, res) => {
        console.log('mapboxUrl ERROR')
        console.log(error)
    }
-    
-    
 }
 
 export default getLocationCoordinates

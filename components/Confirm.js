@@ -1,3 +1,4 @@
+import { ethers } from "ethers"
 import { useContext } from "react"
 import { UberContext } from "../context/uberContext"
 import RideSelector from "./RideSelector"
@@ -13,7 +14,7 @@ const style = {
 
 const Confirm = () => {
 
-    const { currentAccount, pickup, dropoff, price, selectedRide } = useContext(UberContext)
+    const { currentAccount, pickup, dropoff, price, selectedRide, pickupCoordinates, dropoffCoordinates, metamask } = useContext(UberContext)
 
     const storeTripDetails = async (pickup, dropoff) => {
         try {
@@ -33,12 +34,24 @@ const Confirm = () => {
         } catch (error) {
             console.error(error)
         }
+
+        await metamask.request({
+            method: 'eth_sendTransaction',
+            params: [
+              {
+                from: currentAccount,
+                to: process.env.NEXT_PUBLIC_UBER_ADDRESS,
+                gas: '0x7EF40', // 520000 Gwei
+                value: ethers.utils.parseEther(price)._hex,
+              },
+            ],
+        })
     }
 
     return (
         <div className={style.wrapper}>
             <div className={style.rideSelectorContainer}>
-                <RideSelector />
+                {pickupCoordinates && dropoffCoordinates && <RideSelector />}
             </div>  
             <div className={style.confirmButtonContainer}>
                 <div className={style.confirmButtonContainer}>
